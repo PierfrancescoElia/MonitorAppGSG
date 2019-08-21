@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <title>Monitor Cucina</title>
+        <link href="/assets/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <section id="loading" style="vertical-align: middle; text-align: center">
+            <img src="/assets/img/logo.png" alt="San Rocco" height="150px" style="margin-top: 10%">
+            <p>Connessione al database in corso.</p><br><br>
+            <p id="conn-error" style="color:red; font-weight: bold"></p>
+        </section>
+        <section id="dashboard" hidden>
+            <table style="width: 100%; height: 100%">
+                <thead>
+                    <tr>
+			<td style="font-size: 55px; color: green; font-weight: bold;" id="clock"></td>
+                        <td style="color:red; font-style: italic; font-size: 55px;">San Rocco</td>
+                        <td style="color: blue; font-style: italic;"><img src="/assets/img/users.png" alt="Coperti" style="width: 55px; display: inline">&nbsp;<p style="display: inline; font-size: 55px;" id="coperti"></p></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr width: 100%;>
+                        <td width="33%">
+                            <div class="name" id="pietanza_0"></div>
+                            <div class="quantity"  id="quantita_0"></div>
+                        </td>
+                        <td width="33%">
+                            <div class="name" id="pietanza_1"></div>
+                            <div class="quantity" id="quantita_1"></div>
+                        </td>
+                        <td width="33%">
+                            <div class="name" id="pietanza_2"></div>
+                            <div class="quantity"  id="quantita_2"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%">
+                            <div class="name" id="pietanza_3"></div>
+                            <div class="quantity"  id="quantita_3"></div>
+                        </td>
+                        <td>
+                            <div class="name" id="pietanza_4"></div>
+                            <div class="quantity"  id="quantita_4"></div>
+                        </td>
+                        <td>
+                            <div class="name" id="pietanza_5"></div>
+                            <div class="quantity"  id="quantita_5"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="name" id="pietanza_6"></div>
+                            <div class="quantity"  id="quantita_6"></div>
+                        </td>
+                        <td>
+                            <div class="name" id="pietanza_7"></div>
+                            <div class="quantity"  id="quantita_7"></div>
+                        </td>
+                        <td>
+                            <div class="name" id="pietanza_8"></div>
+                            <div class="quantity"  id="quantita_8"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <script src="/assets/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(window).on('load', function() {
+                loadFood();
+            });
+
+            function loadFood() {
+                $.ajax({
+                    contentType: "json",
+                    url: "/db.php",
+                    cache: false,
+                    timeout: 4000,
+                    success: function (res) {
+                        $("#loading").hide();
+                        $("#dashboard").show();
+
+                        var date = new Date();
+                        $('#clock').text(date.getHours() + ":" + String(date.getMinutes()).padStart(2, "0"));
+
+                        res = $.parseJSON(res);
+
+                        $("#coperti").text(res['coperti']);
+
+                        var j = 0;
+                        $.each(res['pietanze'], function(i, item) {
+                            $("#pietanza_" + j).text(i);
+                            $("#quantita_" + j).text(item);
+                            j++;
+                        });
+
+                        setTimeout(loadFood,20000);
+                    },
+                    error: function (res) {
+                        $("#loading").show();
+                        $("#dashboard").hide();
+                        var timeleft = 10;
+                        var timer = setInterval(function(){
+                            $("#conn-error").text("Errore durante la connessione al database. Nuovo tentativo in " + timeleft-- + " secondi.");
+                            if(timeleft < 0){
+                                clearInterval(timer);
+                                $("#conn-error").text("Nuovo tentativo di connessione in corso...");
+                                loadFood();
+                            }
+                        }, 1000);
+                    }
+                });
+            }
+        </script>
+    <style>
+    td {
+        width: 33%;
+        text-align: center;
+        font-size: 55px;
+    }
+
+    .quantity {
+        font-weight: bold;
+        font-size: 77px;
+    }
+    </style>
+    </body>
+</html>
