@@ -49,3 +49,6 @@ Perchè è richiesto intervento umano al fine che sia funzionante, e perchè un 
 
 # Suggerimento
 Se il Raspberry non ha la connessione ad internet - quindi non può automaticamente regolare l'ora - impostarla con `sudo date -s '31/12/2019 23:59`
+
+# Utilizzo
+Dalla pagina `setup.php` è possibile impostare quali pietanze mostrare sul monitor e la data della serata da prendere in considerazione. Per salvare i dati, occorre digitare la password che è indicata [qui](https://github.com/PierfrancescoElia/MonitorAppGSG/blob/master/setup.php#L4).
