@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Submit
-    if ($_POST['password'] == "sr22") { // <- password corretta
+    if ($_POST['password'] == "PASSWORD CORRETTA") { // <- password corretta
         $save['data'] = $_POST['data'];
         $save['pietanze'] = $_POST['pietanze'];
         file_put_contents("config.json", json_encode($save));
