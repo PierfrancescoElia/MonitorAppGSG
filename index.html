@@ -90,7 +90,7 @@
 
                         var j = 0;
                         $.each(res['pietanze'], function(i, item) {
-                            $("#pietanza_" + j).text(i);
+                            $("#pietanza_" + j).text(i.substring(5));
                             $("#quantita_" + j).text(item);
                             j++;
                         });

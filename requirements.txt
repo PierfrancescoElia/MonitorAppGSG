@@ -1,0 +1,5 @@
+nginx
+php-fpm
+php7.4-pgsql
+unclutter
+x11-xserver-utils

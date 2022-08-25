@@ -11,6 +11,14 @@ Monitor App per Gestione Stand Gastronomico
 - unclutter
 - x11-xserver-utils
 
+# Installazione
+`apt install -y requirements.txt`
+- modificare conf nginx per abilitare php
+- abilitare mod pdo con `phpenmod pgsql`
+
+# TO DO 
+- vedere nel setup.php, se esiste una pietanza con nome uguale ad ingrediente, il select potrebbe non selezionare voce corretta, aggiungere controllo di PIET oppure INGR in modo da essere certi della voce da selezionare.
+
 # Idea
 Avere in cucina, un monitor che mostrasse in tempo reale l'andamento di vendita di alcuni (max. 9) pietanze selezionate.
 

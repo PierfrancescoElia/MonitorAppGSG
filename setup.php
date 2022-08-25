@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Submit
-    if ($_POST['password'] == "PASSWORD PER CONFERMA") { // <- password corretta
+    if ($_POST['password'] == "sr22") { // <- password corretta
         $save['data'] = $_POST['data'];
         $save['pietanze'] = $_POST['pietanze'];
         file_put_contents("config.json", json_encode($save));
@@ -17,6 +17,8 @@ require("variables.php");
 
 $query = $db->query("SELECT descrizionebreve FROM articoli");
 while ($r = $query->fetch(PDO::FETCH_ASSOC)) $pietanze[] = $r['descrizionebreve'];
+$query = $db->query("SELECT descrizionebreve FROM ingredienti");
+while ($r = $query->fetch(PDO::FETCH_ASSOC)) $ingredienti[] = $r['descrizionebreve'];
 ?>
 
 <html>
@@ -56,39 +58,34 @@ while ($r = $query->fetch(PDO::FETCH_ASSOC)) $pietanze[] = $r['descrizionebreve'
                     <td>
                         <select name="pietanze[]">
                             <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][0]) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][0],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][0],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
                         </select>
                     </td>
                     <td>
                         <select name="pietanze[]">
                             <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][1]) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][1],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][1],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
                         </select>
                     </td>
                     <td>
                         <select name="pietanze[]">
                             <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][2]) ? 'selected' : "").">".$pietanza."</option>"; ?>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="pietanze[]">
-                            <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][3]) ? 'selected' : "").">".$pietanza."</option>"; ?>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="pietanze[]">
-                            <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][4]) ? 'selected' : "").">".$pietanza."</option>"; ?>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="pietanze[]">
-                            <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][5]) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][2],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][2],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
                         </select>
                     </td>
                 </tr>
@@ -96,19 +93,69 @@ while ($r = $query->fetch(PDO::FETCH_ASSOC)) $pietanze[] = $r['descrizionebreve'
                     <td>
                         <select name="pietanze[]">
                             <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][6]) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][3],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][3],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
                         </select>
                     </td>
                     <td>
                         <select name="pietanze[]">
                             <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][7]) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][4],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][4],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
                         </select>
                     </td>
                     <td>
                         <select name="pietanze[]">
                             <option value="">---</option>
-                            <?php foreach ($pietanze as $pietanza) echo "<option value='".$pietanza."' ".(($pietanza == $config['pietanze'][8]) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][5],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][5],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="pietanze[]">
+                            <option value="">---</option>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][6],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][6],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="pietanze[]">
+                            <option value="">---</option>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][7],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][7],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="pietanze[]">
+                            <option value="">---</option>
+                            <optgroup label="Pietanze">
+                                <?php foreach ($pietanze as $pietanza) echo "<option value='PIET#".$pietanza."' ".(($pietanza == substr($config['pietanze'][8],5)) ? 'selected' : "").">".$pietanza."</option>"; ?>
+                            </optgroup>
+                            <optgroup label="Ingredienti">
+                                <?php foreach ($ingredienti as $ingrediente) echo "<option value='INGR#".$ingrediente."' ".(($ingrediente == substr($config['pietanze'][8],5)) ? 'selected' : "").">".$ingrediente."</option>"; ?>
+                            </optgroup>
                         </select>
                     </td>
                 </tr>
