@@ -92,6 +92,7 @@
                         $.each(res['pietanze'], function(i, item) {
                             $("#pietanza_" + j).text(i.substring(5));
                             $("#quantita_" + j).text(item);
+                            if (i.substring(0,4) == "INGR") $("#pietanza_" + j).css('text-decoration', 'underline dotted');
                             j++;
                         });
 
