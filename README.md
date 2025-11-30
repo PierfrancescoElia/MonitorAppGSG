@@ -16,8 +16,8 @@ Monitor App per Gestione Stand Gastronomico
 - modificare conf nginx per abilitare php
 - abilitare mod pdo con `phpenmod pgsql`
 
-# TO DO 
-- vedere nel setup.php, se esiste una pietanza con nome uguale ad ingrediente, il select potrebbe non selezionare voce corretta, aggiungere controllo di PIET oppure INGR in modo da essere certi della voce da selezionare.
+# Web Server su PC Windows
+Si veda: https://www.usbwebserver.net/webserver/
 
 # Idea
 Avere in cucina, un monitor che mostrasse in tempo reale l'andamento di vendita di alcuni (max. 9) pietanze selezionate.
